@@ -1,0 +1,162 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #f0f0f0; /* Change text color to light */
+    background-color: #1e1e1e; /* Medium-dark background color */
+}
+
+header {
+    background-color: #f0f0f0; /* Darker header background */
+    color: #f0f0f0; /* Light text color */
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #f0f0f0; /* Light link color */
+    text-decoration: none;
+}
+
+section {
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h2 {
+    border-bottom: 2px solid #007BFF; /* Keep accent color */
+    padding-bottom: 10px;
+    color: #1e90ff; /* Light blue color for headings */
+}
+
+.skills, .projects {
+    margin: 20px 0;
+}
+
+.projects .project {
+    margin-bottom: 15px;
+}
+
+.projects .project h3 {
+    margin: 0;
+    color: #1e90ff; /* Light blue color for project titles */
+}
+
+footer {
+    background-color: #1c1c1c; /* Darker footer background */
+    padding: 10px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #f0f0f0; /* Light text color */
+}
+
+footer a {
+    color: #1e90ff; /* Light blue link color */
+    text-decoration: none;
+}
+
+.collapsible {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.collapsible.active, .collapsible:hover {
+    background-color: #0056b3;
+}
+
+.content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #333333; /* Darker content background */
+    color: #f0f0f0; /* Light text color */
+}
+
+.content p {
+    margin: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column; /* Stack form elements vertically */
+    align-items: flex-start; /* Align items to the start */
+}
+
+form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input,
+form textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #f0f0f0;
+    box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+form input,
+form textarea {
+    width: 25%; /* Set width for input fields and textarea */
+    height: auto; /* Reset height for input fields and textarea */
+}
+
+form textarea {
+    width: 100%; /* Ensure textarea takes full width of its container */
+    height: 100px; /* Set a specific height for better visibility */
+}
+
+form button {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    width: 10%; /* Set width for the button */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px; /* Margin for spacing */
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+.message-container {
+    display: flex;
+    flex-direction: column; /* Stack label and textarea vertically */
+    width: 100%; /* Same width as input fields */
+}
+
+
