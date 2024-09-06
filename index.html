@@ -1,87 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!--pieces of information to pre-emptively provide to both the search engines and those viewing your site-->
-    <meta charset="UTF-8"> <!--standard character encoding - supports all characters from all written languages-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Sets the viewport width to match the device's width - no horizontal scrolling 🤢 -->
-    <meta name="description" content="Portfolio of Ido Okashi, Full Stack Developer"> <!--Search engines use this in search results to inform users about the page's content-->
-    <title>Ido Okashi - Curriculum Vitae</title>
-    <link rel="stylesheet" href="styles.css"> <!--Links an external CSS file to the HTML document-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Ido Okashi, Full Stack Developer">
+    <title>Ido Okashi - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header>
-        <h1>Ido Okashi - About</h1>
+        <h1>Ido Okashi - Full Stack Developer</h1>
         <nav>
             <ul>
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#courses">Courses & Certifications</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-	<section id="about">
-		<div class="container">
-			<h2>About Me</h2>
-			<p>I’m Ido Okashi, an aspiring Full Stack Developer with a solid foundation in web technologies and a passion for creating dynamic, responsive applications. 
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>I'm Ido, an aspiring Full-Stack Developer with a solid foundation in web technologies and a passion for creating dynamic, responsive applications.<br/>
 			I’m actively expanding my skills in various frameworks and tools, bringing a unique perspective from my experience as an ISP (Image Signal Processing) tuning engineer. 
 			I thrive in collaborative environments that encourage idea-sharing and continuous learning, and I’m eager to contribute to innovative projects as I grow in my career.</p>
-		</div>
-	</section>
+        </div>
+    </section>
 
     <section id="skills">
         <div class="container">
             <h2>Skills</h2>
-            <div class="skills">
-                <ul>
-                    <li>Front-End: HTML, CSS, JavaScript, React</li>
-                    <li>Back-End: Node.js, Express, Python, Django</li>
-                    <li>Database: MongoDB, SQL</li>
-                    <li>Version Control: Git, GitHub</li>
-                    <li>Other: RESTful APIs, Agile Methodologies</li>
-                </ul>
-            </div>
+            <ul>
+                <li>Front-End: HTML, CSS, JavaScript, React</li>
+                <li>Back-End: Node.js, Express, Python, Django</li>
+                <li>Database: MongoDB, SQL</li>
+                <li>Version Control: Git, GitHub</li>
+                <li>Other: RESTful APIs, Agile Methodologies</li>
+            </ul>
         </div>
     </section>
 
-    <<section id="projects">
+    <section id="projects">
         <div class="container">
             <h2>Projects</h2>
             <button class="collapsible">Project One</button>
             <div class="content">
-                <p>A brief description of Project One. Include technologies used and the impact of the project.</p>
+                <h3>Project One Title</h3>
+                <p>A brief description of Project One. Include technologies used, the impact of the project, and any challenges you overcame.</p>
+                <p><strong>Technologies Used:</strong> [Tech Stack]</p>
+                <a href="#" target="_blank">View Project</a>
             </div>
+
             <button class="collapsible">Project Two</button>
             <div class="content">
+                <h3>Project Two Title</h3>
                 <p>A brief description of Project Two. Highlight any unique features or challenges overcome.</p>
+                <p><strong>Technologies Used:</strong> [Tech Stack]</p>
+                <a href="#" target="_blank">View Project</a>
             </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2>Experience</h2>
+            <h3>Corephotonics - ISP Tuning Engineer</h3>
+            <p>Details about your role, responsibilities, and achievements at this company.</p>
+            <h3>Company Name - Position</h3>
+            <p>Details about your role, responsibilities, and achievements at this company.</p>
+        </div>
+    </section>
+
+    <section id="courses">
+        <div class="container">
+            <h2>Courses & Certifications</h2>
+            <ul>
+                <li>Course Name - "The Complete 2024 Web Developement Bootcamp"by Dr.Angela Yu (02/2024)</li>
+                <li>Certification Name - Institution (Date)</li>
+            </ul>
         </div>
     </section>
 
     <section id="contact">
         <div class="container">
             <h2>Contact</h2>
-			<form id="contactForm">
-				<label for="name">Name:</label>
-				<input type="text" id="name" name="name" required>
-				
-				<label for="email">Email:</label>
-				<input type="email" id="email" name="email" required>
-				
-				<div class="message-container">
-					<label for="message">Message:</label>
-					<textarea id="message" name="message" required></textarea>
-				</div>
-				
-				<button type="submit">Send</button>
-			</form>
-            <p id="formMessage"></p>
-			<p>You can reach me at:<br>
-			<a href="mailto:okashi.ido773@gmail.com">Mail</a><br>
-			<a href="https://www.linkedin.com/in/ido-okashi-812a80170/" target="_blank">LinkedIn</a><br>
-			<a href="https://github.com/IdoOk-collab/Portfolio" target="_blank">GitHub</a> 
-			</p>
+            <form id="contactForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <div class="message-container">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                
+                <button type="submit">Send</button>
+            </form>
+            <p>You can reach me at:<br/>
+                <a href="mailto:okashi.ido773@gmail.com">Mail</a><br/>
+                <a href="https://www.linkedin.com/in/ido-okashi-812a80170/" target="_blank">LinkedIn</a><br/>
+                <a href="https://github.com/IdoOk-collab/Portfolio" target="_blank">GitHub</a> 
+            </p>
         </div>
     </section>
 
