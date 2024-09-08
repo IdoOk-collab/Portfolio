@@ -1,5 +1,3 @@
-// scripts.js
-
 document.addEventListener('DOMContentLoaded', () => {
     // Smooth scrolling for anchor links
     const links = document.querySelectorAll('nav ul li a');
@@ -32,18 +30,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Collapsible sections
+    // Collapsible functionality
     const collapsibles = document.querySelectorAll('.collapsible');
 
     collapsibles.forEach(collapsible => {
-        collapsible.addEventListener('click', () => {
-            collapsible.classList.toggle('active');
-            const content = collapsible.nextElementSibling;
-
-            if (content.style.maxHeight) {
-                content.style.maxHeight = null;
+        collapsible.addEventListener('click', function() {
+            this.classList.toggle('active');
+            const content = this.nextElementSibling;
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
             } else {
-                content.style.maxHeight = content.scrollHeight + 'px';
+                content.style.display = 'block';
             }
         });
     });

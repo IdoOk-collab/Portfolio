@@ -184,3 +184,15 @@ form button:hover {
     flex-direction: column; /* Stack label and textarea vertically */
     width: 100%; /* Same width as input fields */
 }
+
+
+.content {
+    display: none;
+    padding: 15px;
+}
+
+.collapsible.active {
+    background-color: #ddd;
+}
+
+
