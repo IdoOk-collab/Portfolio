@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<body class="light-mode">
     <header>
-        <h1>Ido Okashi - Full Stack Developer</h1>
+        <h1>Ido Okashi<br/>Full Stack Developer</h1>
         <nav>
             <ul>
                 <li><a href="#about">About</a></li>
@@ -23,12 +23,21 @@
         </nav>
     </header>
 
+    <!-- Toggle switch for light/dark mode -->
+    <label class="switch">
+        <input type="checkbox" id="theme-toggle">
+        <span class="slider round"></span>
+    </label>
+
     <section id="about">
         <div class="container">
             <h2>About Me</h2>
-            <p>I'm Ido, an aspiring Full-Stack Developer with a solid foundation in web technologies and a passion for creating dynamic, responsive applications.<br/>
-			I’m actively expanding my skills in various frameworks and tools, bringing a unique perspective from my experience as an ISP (Image Signal Processing) tuning engineer. 
-			I thrive in collaborative environments that encourage idea-sharing and continuous learning, and I’m eager to contribute to innovative projects as I grow in my career.</p>
+            <p>I'm Ido, an aspiring Full-Stack Developer with a solid background in web technologies and a real passion for crafting dynamic, responsive web applications.<br/>
+            I'm always learning and expanding my skills, diving into projects that genuinely interest me.<br/> 
+            What sets me apart is my experience as an ISP (Image Signal Processing) tuning engineer. 
+            This role gave me a deep understanding of image quality metrics, which I bring to my work in tech.<br/> 
+            I thrive in collaborative settings where ideas flow freely and growth is constant, and I'm excited to contribute to innovative projects as I continue to grow in my career.
+            </p>
         </div>
     </section>
 
@@ -48,36 +57,47 @@
     <section id="projects">
         <div class="container">
             <h2>Projects</h2>
-			<button class="collapsible">Project One</button>
-			<div class="content">
-				<h3>Stock Information Search</h3>
-				<p>Type a stock symbol (e.g., AAPL, TSLA) to get information.</p>
-				<form id="stockForm">
-					<input type="text" id="stockSymbol" name="stockSymbol" placeholder="Enter stock symbol" required>
-					<button type="submit">Search</button>
-				</form>
-				<div id="stockData">
-					<!-- Stock data will be displayed here -->
-				</div>
-			</div>
-
-
-            <button class="collapsible">Project Two</button>
+            
+            <button class="collapsible" id="photoEnhancementApp">Photo Enhancement Web App</button>
             <div class="content">
-                <h3>Facebook Trend Finder</h3>
-                <p>You will be able to search for popular trends on social media and track their history<br/>Soon..<br/></p>
-                <!--<p><strong>Technologies Used:</strong> [Tech Stack]</p>
-                <a href="#" target="_blank">View Project</a>-->
+                <!--<h3>Facebook Trend Finder</h3>
+                <p>You will be able to search for popular trends on social media and track their history<br/>Soon..<br/></p>-->
             </div>
+            
+            <button class="collapsible">Stock Information Search</button>
+            <div class="content">
+                <p>Type a stock symbol (e.g., AAPL, TSLA) to get information.</p>
+                <form id="stockForm">
+                    <input type="text" id="stockSymbol" name="stockSymbol" placeholder="Enter stock symbol" required>
+                    <button type="submit">Search</button>
+                </form>
+                
+                <div id="stock-info">
+                    <span id="stock-symbol"></span>:
+                    <span id="current-price"></span>,
+                    <span id="week-range"></span>,
+                    <span id="month-range"></span>,
+                    <span id="year-range"></span>
+                </div>
+            </div>
+
         </div>
     </section>
 
     <section id="experience">
         <div class="container">
             <h2>Experience</h2>
-            <h3>Corephotonics - ISP Tuning Engineer</h3>
-            <!--<p>Details about your role, responsibilities, and achievements at this company.</p>-->
-
+            <ul>
+                <li>Corephotonics - ISP Tuning Engineer:
+                    <p>
+                        I evaluate and improve the image signal processing (ISP) for mobile camera sensors, automating testing processes. 
+                        This role gave me a better grasp of industry practices. 
+                        I developed automation scripts that boosted team efficiency and made progress on PDAF calibration, inspiring me to learn much. 
+                        I’m motivated and reliable, with solid Python skills, but I want to deepen my understanding of tuning software and AEC calibration. 
+                        Moving forward, I’m aiming to get better at 3A tuning calibration and investigate how machine learning could enhance ISP tuning.
+                    </p>
+                </li>
+            </ul>        
         </div>
     </section>
 
@@ -85,8 +105,7 @@
         <div class="container">
             <h2>Courses & Certifications</h2>
             <ul>
-                <li>Course Name - "The Complete 2024 Web Developement Bootcamp"by Dr.Angela Yu (02/2024)</li>
-                <!--<li>Certification Name - Institution (Date)</li>-->
+                <li>Course Name - "The Complete 2024 Web Development Bootcamp" by Dr. Angela Yu (02/2024)</li>
             </ul>
         </div>
     </section>
@@ -121,5 +140,25 @@
     </footer>
 
     <script src="scripts.js"></script>
+    <script>
+        document.getElementById('stockForm').addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent the default form submission
+
+            const stockSymbol = document.getElementById('stockSymbol').value;
+            const response = await fetch(`/api/stock?symbol=${stockSymbol}`);
+            const stockInfo = await response.json();
+
+			if (response.ok) {
+				const output = `
+					${stockInfo.stockName}: $${stockInfo.currentPrice}<br>
+					Week Range: ${stockInfo.weekRange}<br>
+					Year Range: ${stockInfo.yearRange}
+				`;
+				document.getElementById('stock-info').innerHTML = output; // Ensure you're using innerHTML
+			} else {
+				alert(stockInfo.error || 'Failed to fetch stock data');
+			}
+        });
+    </script>
 </body>
 </html>

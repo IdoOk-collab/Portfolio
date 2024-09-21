@@ -1,69 +1,137 @@
+/* 1. Move projects further apart */
+/* 2. When project 1 opens, the gap between both projects is reduced to 0, fix it. */
+/* 3. Check the backend stock information */
+/* 4. use relative coordinates */
+/* 5. change composition of file to make it easier to conver to darkmode */
+
+
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
     padding: 0;
     color: #333333; /* Dark gray for main text */
-    background-color: #E6F7FF; /* Light blue background */
+    margin-left: 16%; /* Adjust the margin to make space for the fixed menu */
+	
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
+                                               /* menu */
 header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 15%; /* Same width as the menu */
+    height: auto;
     background-color: #00A8E1; /* Sky blue header background */
     color: #ffffff; /* White text color for contrast */
-    padding: 20px;
     text-align: center;
+    padding: 1.6% 0;
+    box-shadow: 5px 0 5px rgba(0, 0, 0, 0.1); /* Add shadow for visual separation */
+    z-index: 1; /* Ensure the header stays above the content */
 }
 
 header h1 {
     margin: 0;
-    font-size: 2em;
+    font-size: 1.2em; /* Smaller font size to fit the column */
 }
 
 nav {
+    position: fixed;
+    top: 8.9%; /* Push the menu down to make space for the title */
+    left: 0;
+    width: 15%; /* Set a fixed width for the left menu */
+    height: calc(100% - 80px); /* Make the menu span the full height minus the header */
+    background-color: #007BFF; /* Mid blue background */
     display: flex;
-    justify-content: center; /* Center align the navigation items */
+    flex-direction: column; /* Stack menu items vertically */
+    align-items: flex-start;
+    box-shadow: 5px 0 5px rgba(0, 0, 0, 0.1); /* Add shadow for better visual separation */
 }
 
 nav ul {
-    display: flex;
     list-style: none;
     padding: 0;
     margin: 0;
+    width: 100%; /* Ensure the menu takes full width */
 }
 
 nav ul li {
-    margin: 0 5px; /* Space between navigation items */
+    width: 100%; /* Ensure list items take full width */
+    position: relative; /* Set position relative for the pseudo-element */
 }
 
 nav ul li a {
     color: #ffffff; /* White links for contrast */
     text-decoration: none;
-    padding: 10px 15px; /* Padding for better clickable area */
+    padding: 6%;
+    display: block; /* Make the link fill the entire list item */
+    width: 100%;
+    text-align: left;
     border-radius: 4px; /* Rounded corners for links */
-    transition: background-color 0.3s ease; /* Smooth background color transition */
-    display: inline-block; /* Ensure padding and margin are applied correctly */
-    margin-top: 5px; /* Move the link slightly down */
+    position: relative; /* Set position relative for the pseudo-element */
+    overflow: hidden; /* Ensure the pseudo-element stays within bounds */
+}
+
+nav ul li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100%; /* Full height */
+    width: 0; /* Start with 0 width */
+    background-color: #0056b3; /* Darker blue on hover */
+    transition: width 0.2s ease; /* Smooth transition for width */
+    z-index: -1; /* Place the background behind the text */
+}
+
+nav ul li a:hover::after {
+    width: 89%; /* Adjust width of hover effect */
 }
 
 nav ul li a:hover {
-    background-color: #007BFF; /* Darker blue on hover */
+    color: #ffffff; /* Ensure text color remains white */
 }
 
 section {
-    padding: 20px;
+	width: 100%;
+    padding: 1%;
     background-color: #ffffff; /* White background for sections */
     border-radius: 4px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    margin-bottom: 2%; /* Increase space between sections */
+
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
+    /*position: relative;*/
+    max-width: 97%; /* Allow the container to take up to 90% of the available width */
+    margin: 1.5%; /* 5% margin from the top, centered horizontally */
+}
+
+/* Apply a specific style to all direct children of .container */
+.container > * {
+    margin-left: 3%; /* Example style: adjust as needed */
+    margin-right: 6%; /* Example style: adjust as needed */
+
+}
+
+/* Apply a different margin specifically to paragraphs */
+.container > p {
+    margin-left: 5.3%; /* Adjusted margin specifically for paragraphs */
 }
 
 h2 {
-    border-bottom: 2px solid #007BFF; /* Mid blue for borders */
-    padding-bottom: 10px;
+    position: relative; /* Needed for the pseudo-element to align properly */
+    width: 100%; /* Set the width to 100% of the container */
     color: #007BFF; /* Mid blue color for headings */
+    margin: 0 0; /* Remove default margins (optional) */
+}
+
+h2::after {
+    content: ""; /* Create an empty pseudo-element */
+    display: block;
+    position: absolute;
+    width: 91%; /* 87% width for the bottom line */
+    bottom: 0; /* Position at the bottom of the heading */
+    border-bottom: 2px solid #007BFF; /* Mid blue for borders */
 }
 
 .skills, .projects {
@@ -85,6 +153,8 @@ footer {
     text-align: center;
     font-size: 0.9em;
     color: #ffffff; /* White text color for contrast */
+    width: 100%; /* Ensure the footer spans the full width of the viewport */
+
 }
 
 footer a {
@@ -101,29 +171,34 @@ footer a {
     text-align: left;
     outline: none;
     font-size: 15px;
-    width: 100%;
+    width: 91%;
     border-radius: 4px;
-    margin-bottom: 10px;
+    margin: 0% 15% 2% 3%;
 }
 
 .collapsible.active, .collapsible:hover {
     background-color: #0056b3; /* Darker blue for hover effect */
 }
 
+#photoEnhancementApp {
+    margin-top: 3%;
+}
+
 .content {
-    padding: 0 18px;
+    padding: 1%;
     display: none;
-    overflow: hidden;
+    margin-bottom	: 30px; /* Ensure that even when content is open, it maintains space between projects */
+    /*overflow: hidden;*/
     background-color: #F5F5F5; /* Light gray background for content */
     color: #333333; /* Dark gray text for readability */
 }
 
 .content p {
     margin: 0;
+    margin-bottom: 20px; 
 }
 
 form {
-    display: flex;
     flex-direction: column; /* Stack form elements vertically */
     align-items: flex-start; /* Align items to the start */
 }
@@ -162,7 +237,6 @@ form textarea {
     height: 100px; /* Set a specific height for better visibility */
 }
 
-
 form button {
     background-color: #00A8E1; /* Sky blue button background */
     color: #ffffff; /* White text color */
@@ -173,6 +247,8 @@ form button {
     border: none;
     border-radius: 5px;
     margin-top: 10px; /* Margin for spacing */
+    margin-bottom: 10px; /* Margin for spacing */
+
 }
 
 form button:hover {
@@ -185,14 +261,83 @@ form button:hover {
     width: 100%; /* Same width as input fields */
 }
 
-
-.content {
-    display: none;
-    padding: 15px;
-}
-
 .collapsible.active {
     background-color: #ddd;
 }
 
 
+                                                                                      /* Toggle switch*/
+/* The switch - the box around the slider */
+.switch {
+  position: absolute;
+  display: inline-block;
+  width: 60px;
+  height: 34px; 
+  right: 20px; /* Adds a 20px margin from the right */
+  top: 50px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+}
+
+#stock-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+#stock-info span {
+    margin-right: 10px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* Dark mode class */
+.dark-mode {
+  background-color: #333;
+  color: white;
+}

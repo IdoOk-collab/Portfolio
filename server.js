@@ -1,13 +1,23 @@
 const express = require('express');
 const axios = require('axios');
-require('dotenv').config();
-
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+
+require('dotenv').config();
+const path = require('path');
+const cors = require('cors');
+
+app.use(cors());
+
+// Log the API key being used (be cautious with this in production)
+console.log('Using API key:', process.env.API_KEY);
 
 // Cache object to store stock data
 const cache = {};
 const CACHE_EXPIRY_MS = 5 * 60 * 1000; // Cache expiry time: 5 minutes
+
+// Middleware and other configurations
+app.use(express.json());
 
 // API endpoint for fetching stock information
 app.get('/api/stock', async (req, res) => {
@@ -27,32 +37,29 @@ app.get('/api/stock', async (req, res) => {
         // Fetch data from Yahoo Finance API
         const options = {
             method: 'GET',
-            url: `https://yahoo-finance15.p.rapidapi.com/api/yahoo/hi/history/${stockSymbol}/1d`,
+            url: `https://yfapi.net/v6/finance/quote?region=US&lang=en&symbols=${stockSymbol}`,
             headers: {
-                'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,
-                'X-RapidAPI-Host': 'yahoo-finance15.p.rapidapi.com'
+                'accept': 'application/json',
+                'X-API-KEY': process.env.API_KEY // Use environment variable for API key
             }
         };
 
         const response = await axios.request(options);
-        const data = response.data.items;
+        const data = response.data.quoteResponse.result;
 
         if (!data || data.length === 0) {
             return res.status(400).json({ error: 'Invalid stock symbol or no data available' });
         }
 
-        // Fetch the latest stock data and calculate ranges
-        const latest = data[0];
-        const weekRange = calculateRange(data, 7);
-        const monthRange = calculateRange(data, 30);
-        const yearRange = calculateRange(data, 365);
+        const latest = data[0]; // Get the first result
 
         const stockData = {
-            symbol: stockSymbol.toUpperCase(),
-            currentPrice: latest.close,
-            weekRange,
-            monthRange,
-            yearRange
+            symbol: latest.symbol,
+			stockName: latest.displayName,
+
+            currentPrice: latest.regularMarketPrice,
+            weekRange: latest.regularMarketDayRange,
+            yearRange: `${latest.fiftyTwoWeekLow} - ${latest.fiftyTwoWeekHigh}`
         };
 
         // Save the data to the cache
@@ -64,31 +71,28 @@ app.get('/api/stock', async (req, res) => {
         console.log('Serving fresh data');
         res.json(stockData);
     } catch (error) {
-        console.error(error);
+        console.error('Error details:', error.response ? error.response.data : error.message);
+
+        // Handle specific error codes
+        if (error.response && error.response.status === 403) {
+            return res.status(403).json({ error: 'Access to the API is forbidden. Check your API key or subscription status.' });
+        } else if (error.response && error.response.status === 400) {
+            return res.status(400).json({ error: 'Bad request. Please check the stock symbol.' });
+        }
+
         res.status(500).json({ error: 'Failed to fetch stock data' });
     }
 });
 
-// Helper function to calculate price range over a period
-function calculateRange(data, days) {
-    const slicedData = data.slice(0, days);
-    let min = Infinity;
-    let max = -Infinity;
-
-    slicedData.forEach(day => {
-        const price = parseFloat(day.close);
-        if (price < min) min = price;
-        if (price > max) max = price;
-    });
-
-    return `${min.toFixed(2)} - ${max.toFixed(2)}`;
-}
-
 // Serve static files (your frontend files)
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '../../public')));
+
+// Serve React frontend
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../public', 'index.html'));
+});
 
 // Start the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
 });
